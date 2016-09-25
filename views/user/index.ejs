@@ -1,0 +1,54 @@
+<!--It is used for listing al the users.
+ Its urls is /user
+ -->
+
+<div class="container">
+  <h3>User Administration</h3>
+<table class='table'>
+  <tr>
+  <th>ID</th>
+  <th>Name</th>
+  <!--<th>Registeration No</th>-->
+  <th>Email</th>
+  <!--<th>Branch</th>-->
+  <!--<th>Role</th>-->
+    <!--<th>Position</th>-->
+    <!--<th>Url</th>-->
+    <!--<th>Contact Number</th>-->
+    <!--<th>Domain</th>-->
+  </tr>
+
+  <% _.each(users, function(user) { %>
+
+<tr>
+    <td><%= user.id %></td>
+    <td><%= user.name %></td>
+    <!--<td><%= user.regNo %></td>-->
+    <td><%= user.email %></td>
+    <!--<td><%= user.branch %></td>-->
+    <!--<td><%= user.role %></td>-->
+    <!--<td><%= user.position %></td>-->
+    <!--<td><%= user.url %></td>-->
+    <!--<td><%= user.contact %></td>-->
+    <!--<td><%= user.domain %></td>-->
+
+
+
+    <% if (user.admin) { %>
+    <td> <img src="/images/admin.png"></td>
+    <% } else { %>
+    <td> <img src="/images/pawn.png"></td>
+    <% } %>
+    <td><a href="/user/show/<%= user.id %>" class="btn btn-sm btn-primary">Show</a></td>
+    <td><a href="/user/edit/<%= user.id %>" class="btn btn-sm btn-warning">Edit</a></td>
+
+    <td><form action="/user/destroy/<%= user.id %>" method="POST">
+        <input type="hidden" name="_method" value="delete"/>
+        <input type="submit" class="btn btn-sm btn-danger" value="Delete"/>
+        <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+      </form></td>
+  </tr>
+
+  <% }) %>
+  </table>
+  </div>

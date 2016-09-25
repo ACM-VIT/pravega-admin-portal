@@ -1,0 +1,21 @@
+<div class="container">
+  <h1> User </h1>
+  <h3><%= user.name %> </h3>
+  <!--<h3><%= user.regNo %> </h3>-->
+  <h3><%= user.email %> </h3>
+  <!--<h3><%= user.branch %> </h3>-->
+  <!--<h3><%= user.role %> </h3>-->
+  <!--<h3><%= user.position %> </h3>-->
+  <!--<h3><%= user.url %> </h3>-->
+  <!--<h3><%= user.contact %> </h3>-->
+  <!--<h3><%= user.domain %> </h3>-->
+
+  <% if (user.admin) { %>
+  <td> <img src="/images/admin.png"></td>
+  <% } else { %>
+  <td> <img src="/images/pawn.png"></td>
+  <% } %>
+  <hr>
+
+  <a class="btn btn-medium btn-primary" href="/user/edit/<%=user.id%>">Edit</a>
+</div>
