@@ -1,13 +1,3 @@
-/**
- * User
- *
- * @module      :: Model
- * @description :: A short summary of how this model works and what it represents.
- *
- */
-var bcrypt = require('bcrypt');
-const saltRounds = 10;
-
 module.exports = {
 
   schema: true,
@@ -19,10 +9,11 @@ module.exports = {
       required: true
     },
 
-    // regNo : {
-    //   type : 'string',
-    //   required: true,
-    // },
+
+
+    regNo : {
+      type : 'string'
+    },
 
     email: {
       type: 'string',
@@ -31,56 +22,41 @@ module.exports = {
       unique: true
     },
 
-    // branch : {
-    //   type : 'string',
-    //   required : true,
-    // },
-    //
-    // role : {
-    //   type : 'string',
-    //   required : true,
-    // },
-    //
-    // position  : {
-    //   type : 'string',
-    //   required : true,
-    // },
-    //
-    // url : {
-    //   type : 'string',
-    //   required : true,
-    // },
-    //
-    // contact : {
-    //   type : 'number',
-    //   required : true,
-    // },
-    //
-    // domain : {
-    //   type : 'string',
-    //   required : true,
-    // },
+    branch : {
+      type : 'string'
+    },
+
+    role : {
+      type : 'string'
+    },
+
+    position : {
+      type : 'string'
+    },
+
+    contact : {
+      type : 'integer'
+    },
+
+    domain : {
+      type : 'string'
+    },
+
 
 
     encryptedPassword: {
       type: 'string'
     },
 
+
     admin: {
       type: 'boolean',
       defaultsTo: false
     },
 
-    online : {
-      type : 'boolean',
-      defaultsTo : false
-    },
 
-    // online: {
-    //   type: 'boolean',
-    //   defaultsTo: false
-    // },
-    //
+
+
 
 
 
@@ -88,16 +64,14 @@ module.exports = {
     toJSON: function() {
       var obj = this.toObject();
       delete obj.password;
-      delete obj.confirmation;
-      delete obj.encryptedPassword;
+      delete obj.confirmation1;
       delete obj._csrf;
       return obj;
     }
 
-  },
+  } ,
 
-  beforeValidation: function (values, next) {
-    console.log(values)
+    beforeValidation: function (values, next) {
     if (typeof values.admin !== 'undefined') {
       if (values.admin === 'unchecked') {
         values.admin = false;
@@ -108,20 +82,18 @@ module.exports = {
     next();
   },
 
-  // beforeCreate : function(values, next){
+   beforeCreate: function (values, next) {
+     if (!values.password || values.password != values.confirmation) {
+       return next({err: ["Password doesn't match password confirmation."]});
+     }
 
+     require('bcrypt').hash(values.password, 10, function passwordEncrypted(err, encryptedPassword) {
+       if (err) return next(err);
+       values.encryptedPassword = encryptedPassword;
 
+       next();
+     });
+   }
 
-
-    // if(values.pasword != values.confirmation) {
-    //   return next({err : ["Password doesn't match with password confirmation.Check User.js"]});
-    // }
-    // require('bcrypt').hash(values.password,10,function passwordEncrypted(err, encryptedPassword){
-    //   if(err) return next(err);
-    //   values.encryptedPassword = encryptedPassword;
-    //   next();
-    // });
-  // }
-  //--!!NOT WORKING!!--
 
 };

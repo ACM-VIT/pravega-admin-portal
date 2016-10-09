@@ -1,0 +1,40 @@
+<div class="container">
+  <h3>User Administration</h3>
+  <table class='table'>
+    <tr>
+      <th>Name</th>
+      <th>Url</th>
+      <th>Comments</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+
+
+    </tr>
+
+    <% _.each(urls, function(url) { %>
+    <tr data-id="<%= url.id %>" data-model="url">
+
+
+
+      <td><%= url.name %></td>
+      <td><%= url.url %></td>
+      <td><%= url.comments %></td>
+      <td><%= url.creationDate %></td>
+      <td><%= url.updateDate %></td>
+
+      <% if (session.authenticated && session.User.admin) { %>
+      <td><a href="/url/show_url/<%= url.id %>" class="btn btn-sm btn-primary">Show</a></td>
+      <td><a href="/url/edit_url/<%= url.id %>" class="btn btn-sm btn-warning">Edit</a></td>
+      <td><form action="/url/destroy_url/<%= url.id %>" method="POST">
+          <input type="hidden" name="_method" value="delete"/>
+          <input type="submit" class="btn btn-sm btn-danger" value="Delete"/>
+          <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+        </form></td>
+      <% } %>
+
+    </tr>
+
+
+      <% }) %>
+  </table>
+</div>

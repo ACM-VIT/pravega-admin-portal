@@ -1,4 +1,4 @@
-
+<html>
 <h1> New Sign Up Form</h1>
 
 <head>
@@ -17,24 +17,24 @@
     <h1>Register</h1>
 
     <% if(flash.err && flash) { %>
-    <ul class="alert alert-success">
-      <% Object.keys(flash.err).forEach(function(error){ %>
-      <li><%- JSON.stringify(flash.err[error]) %></li>
-      <% }) %>
-    </ul>
-    <% } %>
+      <div class="alert alert-danger">
+        <% Object.keys(flash.err).forEach(function(error){ %>
+        <li><%- JSON.stringify(flash.err[error]) %></li>
+        <% }) %>
+        <% } %>
+      </div>
+
     <form  action="/user/create" method="POST"  class="form-signin">
       <p><input type="text" name="name" value="" placeholder="Username"></p>
-      <!--<p><input type="text" name="regNo" value="" placeholder="Register Number"></p>-->
+      <p><input type="text" name="regNo" value="" placeholder="Register Number"></p>
       <p><input type="text" name="email" value="" placeholder="Email"></p>
-      <!--<p><input type="text" name="branch" value="" placeholder="Branch"></p>-->
-      <!--<p><input type="text" name="role" value="" placeholder="Role"></p>-->
-      <!--<p><input type="text" name="position" value="" placeholder="Position"></p>-->
-      <!--<p><input type="text" name="url" value="" placeholder="Url"></p>-->
-      <!--<p><input type="text" name="contact" value="" placeholder="Contact Number"></p>-->
-      <!--<p><input type="text" name="domain" value="" placeholder="Domain"></p>-->
-      <!--<p><input type="password" namex ="password" value="" placeholder="Password"></p>-->
-      <!--<p><input type="password" name="confirmation" value="" placeholder="Confirm Password"></p>-->
+      <p><input type="text" name="branch" value="" placeholder="Branch"></p>
+      <p><input type="text" name="role" value="" placeholder="Role"></p>
+      <p><input type="text" name="position" value="" placeholder="Position"></p>
+      <p><input type="text" name="contact" value="" placeholder="Contact Number"></p>
+      <p><input type="text" name="domain" value="" placeholder="Domain"></p>
+      <p><input type="password" name ="password" value="" placeholder="Password"></p>
+      <p><input type="password" name ="confirmation" value="" placeholder="Confirm Password"></p>
 
       <input type="submit" name="commit" value="Register">
       <input type="hidden" name="_csrf" value="<%= _csrf %>">
@@ -44,9 +44,9 @@
 
 </section>
 
-<script src="/js/dependencies/customValidate.js"></script>
 </body>
 </html>
+
 
 
 

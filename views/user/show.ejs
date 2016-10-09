@@ -1,19 +1,20 @@
 <div class="container">
   <h1> User </h1>
-  <h3><%= user.name %> </h3>
-  <!--<h3><%= user.regNo %> </h3>-->
-  <h3><%= user.email %> </h3>
-  <!--<h3><%= user.branch %> </h3>-->
-  <!--<h3><%= user.role %> </h3>-->
-  <!--<h3><%= user.position %> </h3>-->
-  <!--<h3><%= user.url %> </h3>-->
-  <!--<h3><%= user.contact %> </h3>-->
-  <!--<h3><%= user.domain %> </h3>-->
+  <h3>Name  :  <%= user.name %> </h3>
+  <h3><%= user.regNo %> </h3>
+  <h3>Email  :  <%= user.email %> </h3>
+  <h3>Branch  :  <%= user.branch %> </h3>
+  <h3>Role  :  <%= user.role %> </h3>
+  <h3>Position  :  <%= user.position %> </h3>
+  <h3>Contact  :  <%= user.contact %> </h3>
+  <h3>Domain  :  <%= user.domain %> </h3>
 
   <% if (user.admin) { %>
-  <td> <img src="/images/admin.png"></td>
+  <td>Admin <img src="/images/admin.png"></td>
+
   <% } else { %>
   <td> <img src="/images/pawn.png"></td>
+  (Normal User)
   <% } %>
   <hr>
 

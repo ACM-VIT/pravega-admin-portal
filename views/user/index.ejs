@@ -8,31 +8,29 @@
   <tr>
   <th>ID</th>
   <th>Name</th>
-  <!--<th>Registeration No</th>-->
+  <th>Registeration No</th>
   <th>Email</th>
-  <!--<th>Branch</th>-->
-  <!--<th>Role</th>-->
-    <!--<th>Position</th>-->
-    <!--<th>Url</th>-->
-    <!--<th>Contact Number</th>-->
-    <!--<th>Domain</th>-->
+  <th>Branch</th>
+  <th>Role</th>
+    <th>Position</th>
+    <th>Url</th>
+    <th>Contact Number</th>
+    <th>Domain</th>
   </tr>
 
   <% _.each(users, function(user) { %>
+  <tr data-id="<%= user.id %>" data-model="user">
 
-<tr>
     <td><%= user.id %></td>
     <td><%= user.name %></td>
-    <!--<td><%= user.regNo %></td>-->
+    <td><%= user.regNo %></td>
     <td><%= user.email %></td>
-    <!--<td><%= user.branch %></td>-->
-    <!--<td><%= user.role %></td>-->
-    <!--<td><%= user.position %></td>-->
-    <!--<td><%= user.url %></td>-->
-    <!--<td><%= user.contact %></td>-->
-    <!--<td><%= user.domain %></td>-->
-
-
+    <td><%= user.branch %></td>
+    <td><%= user.role %></td>
+    <td><%= user.position %></td>
+    <td><%= user.url %></td>
+    <td><%= user.contact %></td>
+    <td><%= user.domain %></td>
 
     <% if (user.admin) { %>
     <td> <img src="/images/admin.png"></td>

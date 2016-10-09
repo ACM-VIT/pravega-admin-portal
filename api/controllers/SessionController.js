@@ -1,11 +1,5 @@
-/**
- * SessionController
- *
- * @description :: Server-side logic for managing sessions
- * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
- */
+
 var bcrypt = require('bcrypt');
-const saltRounds = 10;
 
 module.exports = {
 
@@ -42,50 +36,36 @@ module.exports = {
         res.redirect('/session/new');
         return;
       }
-      req.session.authenticated = true;
-      req.session.User = user;
 
-      if(req.session.User.admin){
-        res.redirect('/user');
-        return;
-      }
+      bcrypt.compare(req.param('password'), user.encryptedPassword, function(err, valid) {
+
+          if (err) return next(err);
+
+          // If the password from the form doesn't match the password from the database...
+          if (!valid) {
+            var usernamePasswordMismatchError = [{
+              name: 'usernamePasswordMismatch',
+              message: 'Invalid username and password combination.'
+            }]
+            req.session.flash = {
+              err: usernamePasswordMismatchError
+            }
+            res.redirect('/session/new');
+            return;
+          }
+
+        req.session.authenticated = true;
+        req.session.User = user;
+
       res.redirect('/user/show/' + user.id);
-
-
-      // var salt = bcrypt.genSaltSync(saltRounds);
-      // var hash = bcrypt.hashSync(user.encryptedPassword, salt);
-      // bcrypt.compareSync(someOtherPlaintextPassword, hash); // false
-      //   res.redirect('session/new');
-      // bcrypt.compareSync(req.param('password'), hash);
-      //   res.redirect('/user/show/' + user.id);
-
-      // bcrypt.compare(req.param('password'), user.encryptedPassword, function (err, valid) {
-      //   if (err) return next(err);
-      //
-      //   // If the password from the form doesn't match the password from the database...
-      //   if (!valid) {
-      //     var usernamePasswordMismatchError = [{
-      //       name: 'usernamePasswordMismatch',
-      //       message: 'Invalid username and password combination.Check Sessioncontroller.js'
-      //     }];
-      //     req.session.flash = {
-      //       err: usernamePasswordMismatchError
-      //     };
-      //     res.redirect('/session/new');
-      //     return;
-      //   }
-      //
-      //   // Log user in
-      //   req.session.authenticated = true;
-      //   req.session.User = user;
-      //
-      //
-      //   res.redirect('/user/show/' + user.id);
-      // });
     });
+
+    });
+
   },
 
-  destroy: function(req, res, next) {
+
+  destroy: function (req, res, next) {
 
     User.findOne(req.session.User.id, function foundUser(err, user) {
 
@@ -95,10 +75,16 @@ module.exports = {
         // The user is "logging out" (e.g. destroying the session) so change the online attribute to false.
         User.update(userId, {
           online: false
-        }, function(err) {
+        }, function (err) {
           if (err) return next(err);
 
-
+          // Inform other sockets (e.g. connected sockets that are subscribed) that the session for this user has ended.
+          User.publishUpdate(userId, {
+            loggedIn: false,
+            id: userId,
+            name: user.name,
+            action: ' has logged out.'
+          });
 
           // Wipe out the session (log out)
           req.session.destroy();

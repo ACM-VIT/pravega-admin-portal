@@ -1,0 +1,12 @@
+<form action="/url/update_url/<%= url.id %>" method="POST" class="form-signin">
+  <h2>Edit this form</h2>
+
+  <p><input type="text" name="name" value="<%= url.name %>" placeholder="Username"></p>
+  <p><input type="text" name="url" value="<%= url.name %>" placeholder="Url"></p>
+  <p><input type="text" name="comments" value="<%= url.name %>" placeholder="Comments"></p>
+
+  <p><input type="submit" value="Update" class="btn btn-lg- btn-primary btn-block"/></p>
+  <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+</form>
+
+

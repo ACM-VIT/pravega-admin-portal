@@ -1,27 +1,16 @@
 <form action="/user/update/<%= user.id %>" method="POST" class="form-signin">
   <h2>Edit this form</h2>
+
   <p><input type="text" name="name" value="<%= user.name %>" placeholder="Username"></p>
-  <!--<p><input type="text" name="regNo" value="<%= user.regNo %>" placeholder="Register Number"></p>-->
+  <p><input type="text" name="regNo" value="<%= user.regNo %>" placeholder="Register Number"></p>
   <p><input type="text" name="email" value="<%= user.email %>" placeholder="Email"></p>
-  <!--<p><input type="text" name="branch" value="<%= user.name %>" placeholder="Branch"></p>-->
-  <!--<p><input type="text" name="role" value="<%= user.branch %>" placeholder="Role"></p>-->
-  <!--<p><input type="text" name="position" value="<%= user.position %>" placeholder="Position"></p>-->
-  <!--<p><input type="text" name="url" vvalue="<%= user.url %>" placeholder="Url"></p>-->
-  <!--<p><input type="text" name="contact" value="<%= user.contact %>" placeholder="Contact Number"></p>-->
-  <!--<p><input type="text" name="domain" value="<%= user.domain %>" placeholder="Domain"></p>-->
-  <p><input type="password" name="password" value="" placeholder="Password"></p>
-  <p><input type="password" name="confirmation" value="" placeholder="Confirm Password"></p>
-
-  <!--<% if (session.authenticated && session.User.admin) { %>-->
-  <!--<% if (user.admin) { %>-->
-  <!--<input type="hidden" name="admin" value="unchecked">-->
-  <!--<label class="checkbox"><input type="checkbox" name="admin" checked> Admin</label>-->
-  <!--<% } else { %>-->
-  <!--<input type="hidden" name="admin" value="unchecked">-->
-  <!--<label class="checkbox"><input type="checkbox" name="admin"> Admin</label>-->
-  <!--<% } %>-->
-  <!--<% } %>-->
-
+  <p><input type="text" name="branch" value="<%= user.name %>" placeholder="Branch"></p>
+  <p><input type="text" name="role" value="<%= user.branch %>" placeholder="Role"></p>
+  <p><input type="text" name="position" value="<%= user.position %>" placeholder="Position"></p>
+  <p><input type="text" name="url" vvalue="<%= user.url %>" placeholder="Url"></p>
+  <p><input type="text" name="contact" value="<%= user.contact %>" placeholder="Contact Number"></p>
+  <p><input type="text" name="domain" value="<%= user.domain %>" placeholder="Domain"></p>
+  <p><input type="password" name ="password" value="" placeholder="Change Password"></p>
 
   <p><input type="submit" value="Update" class="btn btn-lg- btn-primary btn-block"/></p>
   <input type="hidden" name="_csrf" value="<%= _csrf %>" />
